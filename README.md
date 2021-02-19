@@ -15,6 +15,16 @@ do bash registration.sh non_registered_nii_folder/ $X $PWD/registered_nii_folder
 ```
 
 
-## Pre-Process images
+## Pre-Processing
+
+* ** Convert NIFTI(.nii) files to Numpy(.npy) format for further python operations
+* ** Normalizing the intensity values of the 3d numpy array
+* ** Clips the intensity values above and below a threshold (-1, 2.5)   
+* ** Background signal removal: Eliminates the extra background signal in MRI outside of skull. Using a Depth First Search (DFS) we can set the intesity levels of all voxels with similar value to [-1]. Check the code for further details.
 
 ### Usage
+Takes as input the NIFTI files (registered) from previous step and generates pre-processed numpy files.
+Needs to have brain_region.npy in the same folder as this file for step-4
+```
+python3 preprocess.py choose_your_nii_folder/ folder_to_store_processed_files/ '''
+```

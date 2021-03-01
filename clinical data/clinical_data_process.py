@@ -47,3 +47,28 @@ clinical_data.drop(clinical_data.columns[cols_to_drop], axis=1, inplace=True)
 print("Columns selectively dropped: ", len(cols_to_drop))
 print("Shape after dropping columns: ", clinical_data.shape)
 clinical_data.to_csv('processed_clinical_data.csv', sep='\t', encoding='utf-8')
+
+
+
+
+
+
+clinical_data_clone = clinical_data.copy()
+clinical_data_clone.drop(clinical_data_clone.columns.difference(['study_id','age','sex','ethnicity']), 1, inplace=True)
+race = []
+for i in clinical_data.index:
+	if clinical_data['race___2'][i] == 1:
+		race.append(1)
+	if clinical_data['race___3'][i] == 1:
+		race.append(2)
+	if clinical_data['race___5'][i] == 1:
+		race.append(3)
+	if clinical_data['race___6'][i] == 1:
+		race.append(4)
+
+clinical_data_clone.insert(3, "race", race, True)
+rows_to_drop = [12, 16, 30, 58, 68, 107]
+clinical_data_clone = clinical_data_clone.drop(rows_to_drop)
+
+print("few features clinical data shape: ", clinical_data_clone.shape)
+clinical_data_clone.to_csv('few_features_data.csv', sep='\t', encoding='utf-8')

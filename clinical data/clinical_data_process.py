@@ -71,4 +71,4 @@ rows_to_drop = [12, 16, 30, 58, 68, 107]
 clinical_data_clone = clinical_data_clone.drop(rows_to_drop)
 
 print("few features clinical data shape: ", clinical_data_clone.shape)
-clinical_data_clone.to_csv('few_features_data.csv', sep='\t', encoding='utf-8')
+clinical_data_clone.to_csv('few_features_data.csv', index=False)
